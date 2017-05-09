@@ -1,16 +1,15 @@
-package creativei.entity;
+package vo.modal;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import creativei.entity.Category;
+import creativei.entity.MenuItem;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 26-03-2017.
+ * Created by Administrator on 01-05-2017.
  */
-@Entity
-public class Category extends BaseEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CategoryVo {
     private Long id;
     private String name;
     private Long parentId;
@@ -18,23 +17,29 @@ public class Category extends BaseEntity implements Serializable {
     private String availableFromMin;
     private String availableToHour;
     private String availableToMin;
-    private Boolean isAvailable = true;
-    private int sequenceOrder = 100;
+    private Boolean isAvailable;
+    private int sequenceOrder;
+    private List<MenuItemVo> menuItems;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", targetEntity = MenuItem.class)
-    private List<MenuItem> menuItemList;
-
-    public String getDescription() {
-        return description;
+    public CategoryVo(Category category){
+        this.id = category.getId();
+        this.name = category.getName();
+        this.availableFromHour = category.getAvailableFromHour();
+        this.availableFromMin = category.getAvailableFromMin();
+        this.availableToHour = category.getAvailableToHour();
+        this.availableToMin = category.getAvailableToMin();
+        this.isAvailable = category.getAvailable();
+        this.sequenceOrder = category.getSequenceOrder();
+        this.menuItems = getMenuItemVoList(category.getMenuItemList());
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Long getId() {
+        return id;
     }
 
-    private String description;
-
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -100,19 +105,20 @@ public class Category extends BaseEntity implements Serializable {
         this.sequenceOrder = sequenceOrder;
     }
 
-    public List<MenuItem> getMenuItemList() {
-        return menuItemList;
+    public List<MenuItemVo> getMenuItems() {
+        return menuItems;
     }
 
-    public void setMenuItemList(List<MenuItem> menuItemList) {
-        this.menuItemList = menuItemList;
+    public void setMenuItems(List<MenuItemVo> menuItems) {
+        this.menuItems = menuItems;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    private List<MenuItemVo> getMenuItemVoList(List<MenuItem> menuItems){
+        if(menuItems == null) return null;
+        List<MenuItemVo> menuItemVos = new ArrayList<>();
+        for(MenuItem menuItem : menuItems){
+            menuItemVos.add(new MenuItemVo(menuItem));
+        }
+        return menuItemVos;
     }
 }

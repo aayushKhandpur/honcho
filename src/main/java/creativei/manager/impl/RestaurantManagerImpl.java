@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class RestaurantManagerImpl {
 
-    public ResponseObject getRestaurant( long id){
+    public ResponseObject getRestaurant(){
         //TODO unimplemented
         Restaurant restaurant = new Restaurant();
 

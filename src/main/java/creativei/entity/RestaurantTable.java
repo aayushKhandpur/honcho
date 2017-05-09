@@ -16,6 +16,8 @@ public class RestaurantTable {
     //optional table name
     private String displayName;
 
+    private Integer occupancy;
+
     public Long getId() {
         return id;
     }
@@ -38,5 +40,13 @@ public class RestaurantTable {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public Integer getOccupancy() {
+        return occupancy;
+    }
+
+    public void setOccupancy(Integer occupancy) {
+        this.occupancy = occupancy;
     }
 }
