@@ -1,3 +1,4 @@
+var baseUrl = window.location.protocol + '//' + window.location.host;
 var creativei_app= angular.module("creativei_app",['ui.router','ngStorage','ui.bootstrap','ngAnimate', 'angucomplete-alt'])
 creativei_app.constant('_',
     window._
@@ -9,6 +10,22 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       url: '/services',
       templateUrl: 'modules/services/services.view.html',
       controller: 'ServicesController',
+      resolve: {
+        Services : function($http) {
+          return $http.get(baseUrl + '/restaurant/services')
+                .then(function(response) {
+                  if(response.data.data){
+                    return response.data.data
+                  }else{
+                    console.log(response.data.exception.status+": "+response.data.exception.message);
+                    return [];
+                  }
+                },function(response){
+                  console.log("Unexpected error occured.");
+                  return [];
+                });
+        }
+      }
 
     })
     .state('order', {
@@ -22,10 +39,27 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       templateUrl: 'modules/order/current/currentOrders.view.html',
       controller: 'CurrentOrdersController',
       resolve:{
-        RestaurantTables :function($http){
-          return $http.get('commons/JSONs/tableStatus.json')
+        RestaurantTables :function(RestaurantService){
+          return RestaurantService.getTables()
                 .then(function(response){
-                 return response.data;
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
+            },function(e){
+                console.log(e);
+                return [];
+          });
+        },
+        ActiveOrders : function(OrderService){
+          return OrderService.getActiveOrders()
+                .then(function(response){
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
             },function(e){
                 console.log(e);
                 return [];
@@ -59,17 +93,18 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       templateUrl: 'modules/buildOrder/category/menuItem/menuItem.view.html',
       controller: 'MenuItemController',
       resolve:{
-        categories :function($http){
-          return $http.get('commons/JSONs/category.json')
+        categories :function(CategoryService){
+          return CategoryService.getCategories()
                 .then(function(response){
-                 return response.data;
-            });
-        },
-        menuItems : function($http){
-          return $http.get('commons/JSONs/menuItems.json')
-                .then(function(response){
-                 return response.data;
-            });
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
+            },function(e){
+                console.log(e);
+                return [];
+          });
         }
       }
     })

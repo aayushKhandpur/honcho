@@ -1,5 +1,8 @@
 package creativei.webapp;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import creativei.entity.Category;
 import creativei.entity.Order;
 import creativei.entity.OrderItem;
 import creativei.enums.OrderState;
@@ -10,10 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import vo.Error;
 import vo.ResponseObject;
 import vo.modal.OrderItemVo;
 import vo.modal.OrderVo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +28,7 @@ import java.util.List;
 @RestController
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     OrderManagerImpl orderManager;
 
@@ -56,11 +62,21 @@ public class OrderController {
     @RequestMapping(value = "/order/save", produces = "application/json", method = RequestMethod.POST)
     public
     @ResponseBody
-    ResponseObject saveOrder(@RequestBody OrderVo orderVo, HttpServletRequest request) {
+    ResponseObject saveOrder(@RequestBody String orderStr, HttpServletRequest request) {
         logger.info("Request to save order.");
-        Order order = new Order(orderVo);
-        order.setOrderItemList(getOrderItems(orderVo.getItems(), order));
-        return orderManager.createOrder(order);
+        try {
+            OrderVo orderVo = mapper.readValue(orderStr, new TypeReference<OrderVo>(){});
+            Order order = new Order(orderVo);
+            order.setOrderItemList(getOrderItems(orderVo.getItems(), order));
+            return orderManager.createOrder(order);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            Error er = new Error("1001", e.getMessage());
+            ResponseObject ro = new ResponseObject(er);
+            ro.setStatus(ResponseObject.ResponseStatus.ERROR);
+            return ro;
+        }
+
     }
 
     private List<OrderItem> getOrderItems(List<OrderItemVo> orderItemVos, Order order){

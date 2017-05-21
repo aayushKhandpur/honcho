@@ -18,13 +18,14 @@ public class OrderVo {
     private Long orderId;
     private Long tableId;
     private String customize;
-    private SpiceIndicator spiceIndicator;
+    private SpiceIndicator spiceIndicator = SpiceIndicator.STANDARD;
     private List<OrderItemVo> items;
     private double subtotal;
     private OrderState orderState = OrderState.PLACED;
     private Date orderPunchTime;
     private Date orderCompletionTime;
     private boolean isActive = true;
+    private String user;
 
     public Long getOrderId() {
         return orderId;
@@ -34,12 +35,20 @@ public class OrderVo {
         this.orderId = orderId;
     }
 
-    public String getcustomize() {
+    public Long getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(Long tableId) {
+        this.tableId = tableId;
+    }
+
+    public String getCustomize() {
         return customize;
     }
 
-    public void setcustomize(String customization) {
-        this.customize = customization;
+    public void setCustomize(String customize) {
+        this.customize = customize;
     }
 
     public SpiceIndicator getSpiceIndicator() {
@@ -98,19 +107,11 @@ public class OrderVo {
         isActive = active;
     }
 
-    public Long getTableId() {
-        return tableId;
+    public String getUser() {
+        return user;
     }
 
-    public void setTableId(Long tableId) {
-        this.tableId = tableId;
-    }
-
-    public String getCustomize() {
-        return customize;
-    }
-
-    public void setCustomize(String customize) {
-        this.customize = customize;
+    public void setUser(String user) {
+        this.user = user;
     }
 }

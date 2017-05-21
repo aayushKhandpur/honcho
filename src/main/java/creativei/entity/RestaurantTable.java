@@ -1,10 +1,11 @@
 package creativei.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Restaurant_Table")
-public class RestaurantTable {
+public class RestaurantTable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

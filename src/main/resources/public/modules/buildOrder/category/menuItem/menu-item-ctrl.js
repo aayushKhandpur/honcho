@@ -135,11 +135,10 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
     });
     function newOrder(){
       return {
-        table : $scope.tableId,
+        tableId : $scope.tableId,
         orderId: null,
         user  : "",
         customize : "",
-        spice :  "",
         items : []
       };
     }

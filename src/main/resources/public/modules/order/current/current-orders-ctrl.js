@@ -11,14 +11,12 @@ creativei_app.controller('CurrentOrdersController', function($scope,$http, $stat
     $scope.tableFilter = $scope.tableFilterOptions[0];
 
     _.each(RestaurantTables, function(table){
-      var order = _.find(ActiveOrders, function(order){
-        order.tableId == table.id;
-      });
+      var order = _.findWhere(ActiveOrders, {tableId : table.id});
       if(order){
         var table = {
           id: table.id,
           tableNumber: table.tableNumber,
-          occupancy: table.occupancy,
+          occupancy: table.occupancy || 4,
           isAvailable: false,
           status: order.orderState,
           tableOccupiedDuration: "1:00Hrs",
@@ -28,7 +26,7 @@ creativei_app.controller('CurrentOrdersController', function($scope,$http, $stat
         var table = {
           id: table.id,
           tableNumber: table.tableNumber,
-          occupancy: table.occupancy,
+          occupancy: table.occupancy || 4,
           isAvailable: true,
           status: 'Available',
           order : {}

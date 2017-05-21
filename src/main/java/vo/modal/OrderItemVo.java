@@ -15,11 +15,12 @@ public class OrderItemVo {
     private Long id;
     private Long menuItemId;
     private String customization;
-    private SpiceIndicator spiceIndicator;
+    private SpiceIndicator spiceIndicator = SpiceIndicator.STANDARD;
     private int quantity;
     private double rate;
     private String name;
     private double price;
+    private boolean isVeg;
 
     public Long getId() {
         return id;
@@ -83,5 +84,13 @@ public class OrderItemVo {
 
     public void setMenuItemId(Long menuItemId) {
         this.menuItemId = menuItemId;
+    }
+
+    public boolean isVeg() {
+        return isVeg;
+    }
+
+    public void setVeg(boolean veg) {
+        isVeg = veg;
     }
 }

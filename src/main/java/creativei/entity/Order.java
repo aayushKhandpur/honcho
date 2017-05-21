@@ -20,12 +20,11 @@ public class Order extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "table_id", nullable = false)
+    @JoinColumn(name = "table_id")
     private RestaurantTable table;
     private String customization;
     private SpiceIndicator spiceIndicator;
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItemList;
     private double subtotal;
     private OrderState orderState;
@@ -42,7 +41,7 @@ public class Order extends BaseEntity implements Serializable {
 
     public Order(OrderVo orderVo) {
         this.id = orderVo.getOrderId();
-        this.customization = orderVo.getcustomize();
+        this.customization = orderVo.getCustomize();
         this.isActive = orderVo.isActive();
         this.orderState = orderVo.getOrderState();
         this.tableId = orderVo.getTableId();

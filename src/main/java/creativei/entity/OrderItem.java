@@ -46,6 +46,8 @@ public class OrderItem extends BaseEntity implements Serializable {
         this.quantity = orderItemVo.getQuantity();
         this.rate = orderItemVo.getRate();
         this.price = orderItemVo.getPrice();
+        this.menuItem = new MenuItem();
+        this.menuItem.setId(orderItemVo.getMenuItemId());
     }
 
 

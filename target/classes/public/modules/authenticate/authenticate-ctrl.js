@@ -10,23 +10,28 @@ creativei_app.controller('AuthController', function($scope, $rootScope, AuthServ
     if(!$scope.user || !$scope.user.userId || !$scope.user.password){
       console.log("Invalid credentials.");
     }else{
-      $scope.restaurant= AuthService.get().then(function(response){
-        if(response.data){
-          if($scope.user.userId.toLowerCase() === response.data.userId
-          && $scope.user.password === response.data.password){
+      var data = {
+        userId : $scope.user.userId,
+        password : $scope.user.password
+      };
+      AuthService.login(data).then(function(response){
+        if(response && response.data){
+          if(response.data.status ==="ERROR"){
+            console.log(response.data.exception);
+            alert(response.data.exception.errorCode + ": " + "response.data.exception.message");
+            $rootScope.isAuthenticated = false;
+            $scope.$storage.isAuthenticated = false;
+          }else{
+            $scope.restaurant= response.data.data;
             $rootScope.isAuthenticated = true;
             $scope.$storage.isAuthenticated = true;
-            $scope.$storage.restaurant = response.data;
-            $rootScope.restaurant=response.data;
+            $scope.$storage.restaurant = response.data.data;
+            $rootScope.restaurant=response.data.data;
             $state.go('services');
-          }else{
-            alert("Invalid credentials. Use admin\\admin")
-            console.log("invalid credentials");
           }
         }else{
-          console.log("invalid response");
+          console.log("No response");
         }
-
       });
     }
 

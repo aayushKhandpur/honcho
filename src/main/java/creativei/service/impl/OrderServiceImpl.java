@@ -6,6 +6,7 @@ import creativei.entity.OrderItem;
 import creativei.entity.RestaurantTable;
 import creativei.enums.OrderState;
 import creativei.service.OrderService;
+import creativei.service.RestaurantTableService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderDao orderDao;
 
+    @Autowired
+    RestaurantTableService restaurantTableService;
     @Override
     public List<Order> findOrderByState(OrderState orderState) {
         if (orderState != null) {
@@ -50,7 +53,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(Order order) {
-        updateOrderAndAddOrderItemsByOrderItemIds(order);
         updateOrderAndAddTableByTableId(order);
         return orderDao.save(order);
     }
@@ -74,7 +76,8 @@ public class OrderServiceImpl implements OrderService {
 
     private void updateOrderAndAddTableByTableId(Order order) {
         if (order.getTableId() != null) {
-            RestaurantTable table = entityManager.getReference(RestaurantTable.class, order.getTableId());
+            RestaurantTable table = restaurantTableService.getById(order.getTableId());
+            table.setId(order.getTableId());
             order.setTable(table);
         }
     }

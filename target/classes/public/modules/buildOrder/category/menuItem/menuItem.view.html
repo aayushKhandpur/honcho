@@ -8,7 +8,7 @@
                         <div class="">
                             <div class="input-group searchCategoryWrapper">
                                 <span class="input-group-addon categoryContainer noBorderRadius">
-                                    <select name="categorySelect" class="categorySelect btn" ng-model="selectedCategory" ng-options="category as category.name for category in categories track by category.Id"></select>
+                                    <select name="categorySelect" class="categorySelect btn" ng-model="selectedCategory" ng-options="category as category.name for category in categories track by category.id"></select>
                                 </span>
                                 <input type="search" class="form-control searchBox noBorderRadius fontAwesome" ng-model="query.name" placeholder="&#xf002;&nbsp;Search menu...">
                                 <!--
@@ -21,7 +21,7 @@
                             <!--
                                 <div class="wrapper">
                                 <div class="categoryNav">
-                                <a id="{{category.Id}}" ng-repeat="category in categories | orderBy:'order'">{{category.name}}</a>
+                                <a id="{{category.Id}}" ng-repeat="category in categories | orderorderrder'">{{category.name}}</a>
                                 </div>
                                 <div class="arrowLeft"><i class="fa fa-angle-left" style="font-size:36px;color:#f12f63;" aria-hidden="true"></i></div>
                                 <div class="arrowRight"><i class="fa fa-angle-right" style="font-size:36px;color:#f12f63;" aria-hidden="true"></i></div>
@@ -41,7 +41,7 @@
                         <div ng-show="category.visible" ng-repeat="category in categories | orderBy:'order'">
                             <div ng-if="!category.subCategories" class="panel">
                                 <!--Category Name Starts Here-->
-                                <div id="{{'anchor'+category.Id}}" class="panel-heading categoryHeading">
+                                <div id="anchor{{category.id}}" class="panel-heading categoryHeading">
                                     <h3 class="panel-title">{{category.name}}</h3>
                                 </div>
                                 <!--Category Name Ends Here-->
@@ -70,13 +70,13 @@
                             </div>
                             <div ng-if="category.subCategories" ng-repeat="subCategory in category.subCategories | orderBy:'order'" class="panel">
                                 <!--Sub Category Name Starts Here-->
-                                <div id="{{'anchor'+category.Id}}" class="panel-heading categoryHeading">
+                                <div id="{{'anchor'+category.id}}" class="panel-heading categoryHeading">
                                     <h3 class="panel-title">{{subCategory.categoryName}}</h3>
                                 </div>
                                 <!--Sub Category Name Ends Here-->
                                 <!--Menu Item List Starts Here-->
                                 <div ng-repeat="menuCategory in menuItems">
-                                    <div ng-if="subCategory.Id == menuCategory.categoryId" ng-repeat="menuItem in menuCategory.menuItems" class="panel-body menuItemName">
+                                    <div ng-if="subCategory.id == menuCategory.categoryid" ng-repeat="menuItem in menuCategory.menuItems" class="panel-body menuItemName">
                                         <div class="row">
                                             <div class="col-md-9 col-sm-8">
                                                 <span><img ng-src = "{{menuItem.isVeg && '../../../../assets/images/veg.png' || '../../../../assets/images/non-veg.png'}}"/></span> {{menuItem.name}}

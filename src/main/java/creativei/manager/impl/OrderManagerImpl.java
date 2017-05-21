@@ -5,13 +5,16 @@ import creativei.enums.OrderState;
 import creativei.manager.OrderManager;
 import creativei.service.OrderService;
 import creativei.webapp.CategoryController;
+import org.aspectj.weaver.ast.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vo.Error;
 import vo.ResponseObject;
+import vo.response.ActiveOrderResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,12 +87,22 @@ public class OrderManagerImpl implements OrderManager {
         ResponseObject responseObject;
         try {
             List<Order> orders = orderService.findOrderByIsActive(isActive);
-            responseObject = new ResponseObject(orders);
+
+            responseObject = new ResponseObject(getActiveOrderJson(orders));
+            responseObject.setStatus(ResponseObject.ResponseStatus.SUCCESS);
         } catch (Exception ex) {
             Error error = new Error("1001", ex.getMessage());
             responseObject = new ResponseObject(error);
             responseObject.setStatus(ResponseObject.ResponseStatus.ERROR);
         }
         return responseObject;
+    }
+    private List<ActiveOrderResponse> getActiveOrderJson(List<Order> orders){
+        List<ActiveOrderResponse> orderResponses = new ArrayList<>();
+        if(orders == null) return orderResponses;
+        for (Order order : orders){
+            orderResponses.add(new ActiveOrderResponse(order));
+        }
+        return orderResponses;
     }
 }

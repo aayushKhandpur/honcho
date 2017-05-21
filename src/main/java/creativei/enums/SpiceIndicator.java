@@ -5,7 +5,8 @@ package creativei.enums;
  */
 public enum SpiceIndicator {
     SPICY("spicy"),
-    NON_SPICY("non-spicy");
+    NON_SPICY("non-spicy"),
+    STANDARD("standard");
 
     private final String value;
 
