@@ -14,6 +14,13 @@ creativei_app.factory('OrderService', function($http){
         data: order,
         headers: {'Content-Type': 'application/json'}
       });
+    },
+    getOrder: function(orderId){
+      return $http({
+        method: 'GET',
+        url: baseUrl + '/order/'+orderId,
+        headers: {'Content-Type': 'application/json'}
+      });
     }
   }
 });

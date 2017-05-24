@@ -1,5 +1,5 @@
 'use strict';
-creativei_app.controller('CurrentOrdersController', function($scope,$http, $state, $localStorage, _, RestaurantTables, ActiveOrders){
+creativei_app.controller('CurrentOrdersController', function($scope,$http, $state, $localStorage, _, OrderService, RestaurantTables, ActiveOrders){
   console.log("Inside current orders controller.");
 
 
@@ -53,9 +53,14 @@ creativei_app.controller('CurrentOrdersController', function($scope,$http, $stat
             }
 }
     };
-    $scope.assign = function(tableNumber){
-      $localStorage.currentTable = tableNumber;
+    $scope.assign = function(tableId){
+      $localStorage.currentTable = tableId;
       $state.go('buildOrder.menuItem');
+    }
+
+    $scope.manage = function(orderId, tableId){
+      $localStorage.currentTable = tableId;
+      $state.go('buildOrder.trackOrder', {orderId : orderId});
     }
     //end filter implementation
     //dummy json for tables

@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Order order) {
+    public Order createOrder(Order order) throws Exception {
         updateOrderAndAddTableByTableId(order);
         return orderDao.save(order);
     }
@@ -74,9 +74,13 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void updateOrderAndAddTableByTableId(Order order) {
+    private void updateOrderAndAddTableByTableId(Order order) throws Exception {
         if (order.getTableId() != null) {
             RestaurantTable table = restaurantTableService.getById(order.getTableId());
+            if(table == null){
+                logger.error("No table found with table Id: "+ order.getTableId());
+                throw new Exception("No Table found with table Id.");
+            }
             table.setId(order.getTableId());
             order.setTable(table);
         }

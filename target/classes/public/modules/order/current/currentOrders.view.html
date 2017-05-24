@@ -9,7 +9,7 @@
     <!--Table detail starts here-->
     <div class="row">
         <div class="col-md-3 col-sm-6" ng-repeat="table in tables | filter:tableFilterFunction | orderBy : 'tableNumber'">
-            <div ng-hide="table.isAvailable" class="table tableOccupied">
+            <div ng-hide="table.isAvailable" class="table tableOccupied" ng-click="manage(table.order.id, table.id)">
                 <div class="media">
                     <div class="media-left tableNo">
                         <div class="media-object">{{table.tableNumber}}</div>
@@ -29,7 +29,7 @@
                     <div class="media-body tableDetail">
                         <div>Occupancy<span class="label label-success pull-right">{{table.occupancy}}</span></div>
                         <br>
-                        <button class="btn btn-success assignButton" ng-click="assign(table.tableNumber)">Assign</button>
+                        <button class="btn btn-success assignButton" ng-click="assign(table.id)">Assign</button>
                     </div>
                 </div>
             </div>

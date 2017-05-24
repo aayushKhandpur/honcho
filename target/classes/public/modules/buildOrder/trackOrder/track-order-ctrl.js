@@ -1,7 +1,9 @@
-creativei_app.controller('OrderTrackerController', function($scope, $rootScope, $localStorage, CartService){
+creativei_app.controller('OrderTrackerController', function($scope, $rootScope, $localStorage, CartService, Order){
   console.log("Inside order tracker controller.");
   $scope.tableId = $localStorage.currentTable;
-  $scope.cartItems = $localStorage.runningOrders[$scope.tableId].items;
+  $scope.order = Order;
+  //$scope.cartItems = $localStorage.runningOrders[$scope.tableId].items;
+  $scope.cartItems = Order.orderItemList;
   $scope.subtotal = CartService.updateSubTotal($scope.cartItems);
 
 

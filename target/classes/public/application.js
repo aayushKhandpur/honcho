@@ -109,9 +109,33 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       }
     })
     .state('buildOrder.trackOrder',{
-      url: '/trackOrder',
+      url: '/trackOrder/:orderId',
       templateUrl: 'modules/buildOrder/trackOrder/trackOrder.view.html',
-      controller: 'OrderTrackerController'
+      controller: 'OrderTrackerController',
+      params : {
+        order : null
+      },
+      resolve : {
+        Order : function($stateParams, OrderService){
+          var order = $stateParams.order || {};
+          var id  = $stateParams.orderId;
+          if(order.id && order.id !== null && order.id !== "") return order;
+          return OrderService.getOrder(id)
+                  .then(function(response){
+                    if(response.data.status =="ERROR"){
+                      console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                      return {};
+                    }
+                   return response.data.data;
+                  }, function(e){
+                    console.log(e);
+                    return {};
+                  });
+
+          return id;
+        }
+
+      }
     })
     .state('buildOrder.feedback', {
         url: '/feedback',

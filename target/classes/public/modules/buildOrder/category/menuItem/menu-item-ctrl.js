@@ -147,14 +147,19 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
         $scope.order.subtotal = $scope.subtotal;
         var data = $scope.order;
         OrderService.saveOrder(data).then(function(response){
-          console.log("Order created.");
-          if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
-          if(!$localStorage.runningOrders[$scope.tableId]){
-        //    $scope.order.items = $scope.order.items;
-            $localStorage.runningOrders[$scope.tableId] = $scope.order;
+          if(response.data.status == 'ERROR')
+          {
+            console.error();(response.data.exception.errorCode +" : " + response.data.exception.message);
+          }else{
+            console.log("Order created.");
+            if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
+            if(!$localStorage.runningOrders[$scope.tableId]){
+          //    $scope.order.items = $scope.order.items;
+              $localStorage.runningOrders[$scope.tableId] = $scope.order;
+            }
+          //  $localStorage.runningOrders[$scope.tableId].items = $scope.order.items;
+            $state.go('buildOrder.trackOrder');
           }
-        //  $localStorage.runningOrders[$scope.tableId].items = $scope.order.items;
-          $state.go('buildOrder.trackOrder');
         });
 
     }

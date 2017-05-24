@@ -27,12 +27,18 @@ public class OrderManagerImpl implements OrderManager {
     private static final Logger logger = LoggerFactory.getLogger(OrderManagerImpl.class);
 
     public ResponseObject getById(Long id) {
-        Order order = new Order();
-        ResponseObject responseObject = new ResponseObject(order);
-        Exception e = new UnsupportedOperationException("Not supported");
-        responseObject = new ResponseObject(e.getMessage(), "1001");
-        responseObject.setStatus(ResponseObject.ResponseStatus.ERROR);
-        return responseObject;
+        ResponseObject responseObject = null;
+        try {
+            Order order = orderService.findOrder(id);
+            responseObject = new ResponseObject(getActiveOrderJson(order));
+            responseObject.setStatus(ResponseObject.ResponseStatus.SUCCESS);
+        }catch (Exception ex) {
+            Error error = new Error("1001", ex.getMessage());
+            responseObject = new ResponseObject(error);
+            responseObject.setStatus(ResponseObject.ResponseStatus.ERROR);
+        }finally {
+            return responseObject;
+        }
     }
 
     @Override
@@ -69,14 +75,13 @@ public class OrderManagerImpl implements OrderManager {
         ResponseObject responseObject = null;
         try {
             order = orderService.createOrder(order);
-            responseObject = new ResponseObject(order);
+            responseObject = new ResponseObject(getActiveOrderJson(order));
             responseObject.setStatus(ResponseObject.ResponseStatus.SUCCESS);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             Error error = new Error("1001", ex.getMessage());
             responseObject = new ResponseObject(error);
             responseObject.setStatus(ResponseObject.ResponseStatus.ERROR);
-
         } finally {
             return responseObject;
         }
@@ -88,7 +93,7 @@ public class OrderManagerImpl implements OrderManager {
         try {
             List<Order> orders = orderService.findOrderByIsActive(isActive);
 
-            responseObject = new ResponseObject(getActiveOrderJson(orders));
+            responseObject = new ResponseObject(getActiveOrdersJson(orders));
             responseObject.setStatus(ResponseObject.ResponseStatus.SUCCESS);
         } catch (Exception ex) {
             Error error = new Error("1001", ex.getMessage());
@@ -97,11 +102,14 @@ public class OrderManagerImpl implements OrderManager {
         }
         return responseObject;
     }
-    private List<ActiveOrderResponse> getActiveOrderJson(List<Order> orders){
+    private ActiveOrderResponse getActiveOrderJson(Order order){
+        return new ActiveOrderResponse(order);
+    }
+    private List<ActiveOrderResponse> getActiveOrdersJson(List<Order> orders){
         List<ActiveOrderResponse> orderResponses = new ArrayList<>();
         if(orders == null) return orderResponses;
         for (Order order : orders){
-            orderResponses.add(new ActiveOrderResponse(order));
+            orderResponses.add(getActiveOrderJson(order));
         }
         return orderResponses;
     }
