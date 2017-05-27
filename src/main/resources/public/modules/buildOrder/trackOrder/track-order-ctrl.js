@@ -30,6 +30,6 @@ creativei_app.controller('OrderTrackerController', function($scope,$state, $root
     $scope.menuItems = $localStorage.menuItemList;
 
     $scope.toMenu = function(){
-      $state.go('buildOrder.menuItem', {orderId : $scope.order.id});
+      $state.go('buildOrder.menuItem', {id : $scope.order.id});
     };
 });

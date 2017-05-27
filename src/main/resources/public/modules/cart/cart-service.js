@@ -68,7 +68,7 @@ creativei_app.factory('CartService', function($http, $rootScope, $localStorage, 
   function getOrderTemplate(tableId){
     var order = {
       tableId : tableId,
-      orderId: null,
+      id: null,
       user  : "",
       customize : "",
       items : []

@@ -89,7 +89,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       controller: 'CategoryController'
     })
     .state('buildOrder.menuItem',{
-      url: '/menuItem/:orderId/:categoryName',
+      url: '/menuItem/:id/:categoryName',
       templateUrl: 'modules/buildOrder/category/menuItem/menuItem.view.html',
       controller: 'MenuItemController',
       params : {
@@ -111,7 +111,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
         },
         CurrentOrder :function($stateParams, OrderService){
           var order = $stateParams.order || {};
-          var id  = $stateParams.orderId;
+          var id  = $stateParams.id;
           if(order.id && order.id !== null && order.id !== "") return order;
           if(id === undefined || id == null || id === "") return {};
           return OrderService.getOrder(id)
@@ -131,7 +131,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       }
     })
     .state('buildOrder.trackOrder',{
-      url: '/trackOrder/:orderId',
+      url: '/trackOrder/:id',
       templateUrl: 'modules/buildOrder/trackOrder/trackOrder.view.html',
       controller: 'OrderTrackerController',
       params : {
@@ -140,7 +140,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       resolve : {
         Order : function($stateParams, OrderService){
           var order = $stateParams.order || {};
-          var id  = $stateParams.orderId;
+          var id  = $stateParams.id;
           if(order.id && order.id !== null && order.id !== "") return order;
           return OrderService.getOrder(id)
                   .then(function(response){
