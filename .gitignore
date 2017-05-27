@@ -1,3 +1,5 @@
 .idea
 target
+target\maven-status
+target\classes
 restaurant_backend.iml

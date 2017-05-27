@@ -4,7 +4,13 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
     $scope.tableId = $localStorage.currentTable;
     //TODO set $scope.order
 
-    $scope.order = (CurrentOrder == null || CurrentOrder === {}) ? getNewOrder() : CurrentOrder;
+    // $scope.order = (CurrentOrder == null || CurrentOrder === {}) ?  : CurrentOrder;
+
+    if(CurrentOrder === null || CurrentOrder == {} || CurrentOrder.items == null){
+      $scope.order = getNewOrder();
+    }else{
+      $scope.order = CurrentOrder;
+    }
     // if($localStorage.runningOrders && $localStorage.runningOrders != {}){
     //   $scope.order = $localStorage.runningOrders[$scope.tableId] || getNewOrder();
     // }else {
