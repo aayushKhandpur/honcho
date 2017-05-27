@@ -2,7 +2,6 @@ package creativei.entity;
 
 import creativei.enums.OrderState;
 import creativei.enums.SpiceIndicator;
-import org.aspectj.weaver.ast.Or;
 import vo.modal.OrderVo;
 
 import javax.persistence.*;
@@ -40,10 +39,10 @@ public class Order extends BaseEntity implements Serializable {
     }
 
     public Order(OrderVo orderVo) {
-        this.id = orderVo.getOrderId();
+        this.id = orderVo.getId();
         this.customization = orderVo.getCustomize();
         this.isActive = orderVo.isActive();
-        this.orderState = orderVo.getOrderState();
+        this.orderState = OrderState.valueOf(orderVo.getState());
         this.tableId = orderVo.getTableId();
         this.subtotal = orderVo.getSubtotal();
         this.spiceIndicator = orderVo.getSpiceIndicator();

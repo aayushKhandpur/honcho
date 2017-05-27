@@ -18,7 +18,7 @@ creativei_app.controller('CurrentOrdersController', function($scope,$http, $stat
           tableNumber: table.tableNumber,
           occupancy: table.occupancy || 4,
           isAvailable: false,
-          status: order.orderState,
+          status: order.state,
           tableOccupiedDuration: "1:00Hrs",
           order : order
         };

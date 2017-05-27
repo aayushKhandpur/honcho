@@ -89,9 +89,12 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       controller: 'CategoryController'
     })
     .state('buildOrder.menuItem',{
-      url: '/menuItem/:categoryName',
+      url: '/menuItem/:orderId/:categoryName',
       templateUrl: 'modules/buildOrder/category/menuItem/menuItem.view.html',
       controller: 'MenuItemController',
+      params : {
+        order : null
+      },
       resolve:{
         categories :function(CategoryService){
           return CategoryService.getCategories()
@@ -105,6 +108,25 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
                 console.log(e);
                 return [];
           });
+        },
+        CurrentOrder :function($stateParams, OrderService){
+          var order = $stateParams.order || {};
+          var id  = $stateParams.orderId;
+          if(order.id && order.id !== null && order.id !== "") return order;
+          if(id === undefined || id == null || id === "") return {};
+          return OrderService.getOrder(id)
+                  .then(function(response){
+                    if(response.data.status =="ERROR"){
+                      console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                      return {};
+                    }
+                   return response.data.data;
+                  }, function(e){
+                    console.log(e);
+                    return {};
+                  });
+
+          return id;
         }
       }
     })

@@ -2,7 +2,6 @@ package vo.response;
 
 import creativei.entity.Order;
 import creativei.entity.OrderItem;
-import org.aspectj.weaver.ast.Or;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,12 +13,12 @@ import java.util.List;
 public class ActiveOrderResponse {
     private long id;
     private long tableId;
-    private String customization;
+    private String customize;
     private double subtotal;
     private String state;
     private Date punchTime;
     private Date completionTime;
-    private List<OrderItemResponse> orderItemList;
+    private List<OrderItemResponse> items;
 
     public ActiveOrderResponse(){
 
@@ -28,15 +27,15 @@ public class ActiveOrderResponse {
     public ActiveOrderResponse(Order order){
         this.id = order.getId();
         this.completionTime = order.getOrderCompletionTime();
-        this.customization = order.getCustomization();
+        this.customize = order.getCustomization();
         this.punchTime = order.getOrderPunchTime();
         this.state = order.getOrderState().toString();
         this.subtotal = order.getSubtotal();
         this.tableId = order.getTable().getId();
         if(order.getOrderItemList() != null){
-            if(this.orderItemList == null) this.orderItemList = new ArrayList<>();
+            if(this.items == null) this.items = new ArrayList<>();
             for (OrderItem orderItem : order.getOrderItemList()){
-                this.orderItemList.add(new OrderItemResponse(orderItem));
+                this.items.add(new OrderItemResponse(orderItem));
             }
         }
     }
@@ -57,12 +56,12 @@ public class ActiveOrderResponse {
         this.tableId = tableId;
     }
 
-    public String getCustomization() {
-        return customization;
+    public String getCustomize() {
+        return customize;
     }
 
-    public void setCustomization(String customization) {
-        this.customization = customization;
+    public void setCustomize(String customize) {
+        this.customize = customize;
     }
 
     public double getSubtotal() {
@@ -97,12 +96,12 @@ public class ActiveOrderResponse {
         this.completionTime = completionTime;
     }
 
-    public List<OrderItemResponse> getOrderItemList() {
-        return orderItemList;
+    public List<OrderItemResponse> getItems() {
+        return items;
     }
 
-    public void setOrderItemList(List<OrderItemResponse> orderItemList) {
-        this.orderItemList = orderItemList;
+    public void setItems(List<OrderItemResponse> items) {
+        this.items = items;
     }
 
     public class OrderItemResponse{
@@ -110,7 +109,7 @@ public class ActiveOrderResponse {
         private String name;
         private long menuItemId;
         private long orderId;
-        private String customization;
+        private String customize;
         private int quantity;
         private double rate;
         private double price;
@@ -124,7 +123,7 @@ public class ActiveOrderResponse {
             this.name = orderItem.getName();
             this.menuItemId = orderItem.getMenuItem().getId();
             this.orderId = orderItem.getOrder().getId();
-            this.customization = orderItem.getCustomization();
+            this.customize = orderItem.getCustomization();
             this.quantity = orderItem.getQuantity();
             this.rate = orderItem.getRate();
             this.price = orderItem.getPrice();
@@ -162,12 +161,12 @@ public class ActiveOrderResponse {
             this.orderId = orderId;
         }
 
-        public String getCustomization() {
-            return customization;
+        public String getCustomize() {
+            return customize;
         }
 
-        public void setCustomization(String customization) {
-            this.customization = customization;
+        public void setCustomize(String customize) {
+            this.customize = customize;
         }
 
         public int getQuantity() {

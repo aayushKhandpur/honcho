@@ -1,13 +1,15 @@
 creativei_app.controller('MenuItemController', function ($scope, $filter, $uibModal, $stateParams
-  , $http, $state, $localStorage, $anchorScroll, $location, CartService, OrderService, _, categories) {
+  , $http, $state, $localStorage, $anchorScroll, $location, CartService, OrderService, _, categories, CurrentOrder) {
     console.log("Inside menu item controller.");
     $scope.tableId = $localStorage.currentTable;
-  //  $scope.order $localStorage.runningOrders == undefined ? newOrder() : $localStorage.runningOrders[$scope.tableId];
-    if($localStorage.runningOrders && $localStorage.runningOrders != {}){
-      $scope.order = $localStorage.runningOrders[$scope.tableId] || newOrder();
-    }else {
-      $scope.order = newOrder();
-    }
+    //TODO set $scope.order
+
+    $scope.order = (CurrentOrder == null || CurrentOrder === {}) ? getNewOrder() : CurrentOrder;
+    // if($localStorage.runningOrders && $localStorage.runningOrders != {}){
+    //   $scope.order = $localStorage.runningOrders[$scope.tableId] || getNewOrder();
+    // }else {
+    //   $scope.order = getNewOrder();
+    // }
     $scope.categories = categories;
     $scope.selectedCategory = $scope.categories[0];
     $scope.cartSize = 0;
@@ -23,12 +25,13 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
       });
 
     }
-    //sync cart and menu in case there is already an order
-    if($localStorage.runningOrders
-      && $localStorage.runningOrders[$scope.tableId]
-      && $localStorage.runningOrders[$scope.tableId].items){
-      syncMenuItemAndCartWithRoot();
-    }
+    //TODO sync cart and menu in case there is already an order
+    if($scope.order.items.length > 0) syncMenuItemAndCartWithRoot();
+    // if($localStorage.runningOrders
+    //   && $localStorage.runningOrders[$scope.tableId]
+    //   && $localStorage.runningOrders[$scope.tableId].items){
+    //   syncMenuItemAndCartWithRoot();
+    // }
     $localStorage.menuItemList = $scope.menuItemList;
 
     $scope.$watch('query.name', function(newValue, oldValue) {
@@ -95,12 +98,12 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
           }
         });
       });
-    //  $scope.cartItems = $rootScope.runningOrders[$scope.tableId].items;
       $scope.subtotal = CartService.updateSubTotal($scope.order.items);
     //if(orderItem.quantity == 0) delete $scope.cartItems[orderItem.id];
     };
     function syncMenuItemAndCartWithRoot(){
-      var items = $localStorage.runningOrders[$scope.tableId].items;
+      //var items = $localStorage.runningOrders[$scope.tableId].items;
+      var items = $scope.order.items;
       for(index in items){
         var orderItem = items[index];
         angular.forEach($scope.categories, function(category, key){
@@ -111,7 +114,7 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
           });
         });
       }
-      $scope.order.items = $localStorage.runningOrders[$scope.tableId].items;
+      //$scope.order.items = $localStorage.runningOrders[$scope.tableId].items;
       $scope.subtotal = CartService.updateSubTotal($scope.order.items);
     }
 
@@ -133,7 +136,7 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
         $anchorScroll('anchor'+ newValue.id);
     //    $scope.gotoAnchor(newValue);
     });
-    function newOrder(){
+    function getNewOrder(){
       return {
         tableId : $scope.tableId,
         orderId: null,

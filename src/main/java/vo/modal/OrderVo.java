@@ -1,12 +1,8 @@
 package vo.modal;
 
-import creativei.entity.OrderItem;
 import creativei.enums.OrderState;
 import creativei.enums.SpiceIndicator;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -15,24 +11,24 @@ import java.util.List;
  */
 public class OrderVo {
 
-    private Long orderId;
+    private Long id;
     private Long tableId;
     private String customize;
     private SpiceIndicator spiceIndicator = SpiceIndicator.STANDARD;
     private List<OrderItemVo> items;
     private double subtotal;
-    private OrderState orderState = OrderState.PLACED;
-    private Date orderPunchTime;
-    private Date orderCompletionTime;
+    private String state = OrderState.PLACED.toString();
+    private Date punchTime;
+    private Date completionTime;
     private boolean isActive = true;
     private String user;
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getTableId() {
@@ -75,28 +71,28 @@ public class OrderVo {
         this.subtotal = subtotal;
     }
 
-    public OrderState getOrderState() {
-        return orderState;
+    public String getState() {
+        return state;
     }
 
-    public void setOrderState(OrderState orderState) {
-        this.orderState = orderState;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public Date getOrderPunchTime() {
-        return orderPunchTime;
+    public Date getPunchTime() {
+        return punchTime;
     }
 
-    public void setOrderPunchTime(Date orderPunchTime) {
-        this.orderPunchTime = orderPunchTime;
+    public void setPunchTime(Date punchTime) {
+        this.punchTime = punchTime;
     }
 
-    public Date getOrderCompletionTime() {
-        return orderCompletionTime;
+    public Date getCompletionTime() {
+        return completionTime;
     }
 
-    public void setOrderCompletionTime(Date orderCompletionTime) {
-        this.orderCompletionTime = orderCompletionTime;
+    public void setCompletionTime(Date completionTime) {
+        this.completionTime = completionTime;
     }
 
     public boolean isActive() {
