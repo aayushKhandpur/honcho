@@ -25,6 +25,10 @@ public class ResponseObject {
     public ResponseObject(Object data){
         this.data = data;
     }
+    public ResponseObject(Object data, ResponseStatus status){
+        this.data = data;
+        this.status = status;
+    }
 
     public ResponseObject(Error exception){
         this.exception = exception;

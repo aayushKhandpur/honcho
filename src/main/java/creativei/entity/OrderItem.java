@@ -1,6 +1,7 @@
 package creativei.entity;
 
 import creativei.enums.SpiceIndicator;
+import vo.modal.OrderItemVo;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,13 +10,13 @@ import java.io.Serializable;
  * Created by Administrator on 26-03-2017.
  */
 @Entity
-public class OrderItem extends BaseEntity implements Serializable{
+public class OrderItem extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "menu_item_id", nullable= false)
+    @JoinColumn(name = "menu_item_id", nullable = false)
     private MenuItem menuItem;
 
     private String customization;
@@ -23,7 +24,7 @@ public class OrderItem extends BaseEntity implements Serializable{
     private SpiceIndicator spiceIndicator;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "order_id", nullable= false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     private int quantity;
@@ -31,6 +32,23 @@ public class OrderItem extends BaseEntity implements Serializable{
     private double rate;
 
     private String name;
+
+    private double price;
+
+    public OrderItem() {
+    }
+
+    public OrderItem(OrderItemVo orderItemVo) {
+        this.name = orderItemVo.getName();
+        this.id = orderItemVo.getId();
+        this.spiceIndicator = orderItemVo.getSpiceIndicator();
+        this.customization = orderItemVo.getCustomization();
+        this.quantity = orderItemVo.getQuantity();
+        this.rate = orderItemVo.getRate();
+        this.price = orderItemVo.getPrice();
+        this.menuItem = new MenuItem();
+        this.menuItem.setId(orderItemVo.getMenuItemId());
+    }
 
 
     public MenuItem getMenuItem() {
@@ -95,5 +113,13 @@ public class OrderItem extends BaseEntity implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

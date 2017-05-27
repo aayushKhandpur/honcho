@@ -3,6 +3,7 @@ package creativei.service.impl;
 import creativei.dao.CategoryDao;
 import creativei.entity.Category;
 import creativei.service.CategoryService;
+import creativei.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,16 @@ import java.util.List;
  */
 @Service("CategoryService")
 public class CategoryServiceImpl implements CategoryService{
+
     @Autowired
     CategoryDao categoryDao;
+    @Autowired
+    MenuItemService menuItemService;
 
     @Override
     public List<Category> getAll() {
-        return categoryDao.findAll();
+        List<Category> categories =  categoryDao.findAll();
+        return  categories;
     }
 
     @Override

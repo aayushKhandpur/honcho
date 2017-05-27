@@ -1,3 +1,4 @@
+var baseUrl = window.location.protocol + '//' + window.location.host;
 var creativei_app= angular.module("creativei_app",['ui.router','ngStorage','ui.bootstrap','ngAnimate', 'angucomplete-alt'])
 creativei_app.constant('_',
     window._
@@ -9,6 +10,22 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       url: '/services',
       templateUrl: 'modules/services/services.view.html',
       controller: 'ServicesController',
+      resolve: {
+        Services : function($http) {
+          return $http.get(baseUrl + '/restaurant/services')
+                .then(function(response) {
+                  if(response.data.data){
+                    return response.data.data
+                  }else{
+                    console.log(response.data.exception.status+": "+response.data.exception.message);
+                    return [];
+                  }
+                },function(response){
+                  console.log("Unexpected error occured.");
+                  return [];
+                });
+        }
+      }
 
     })
     .state('order', {
@@ -22,10 +39,27 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       templateUrl: 'modules/order/current/currentOrders.view.html',
       controller: 'CurrentOrdersController',
       resolve:{
-        RestaurantTables :function($http){
-          return $http.get('commons/JSONs/tableStatus.json')
+        RestaurantTables :function(RestaurantService){
+          return RestaurantService.getTables()
                 .then(function(response){
-                 return response.data;
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
+            },function(e){
+                console.log(e);
+                return [];
+          });
+        },
+        ActiveOrders : function(OrderService){
+          return OrderService.getActiveOrders()
+                .then(function(response){
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
             },function(e){
                 console.log(e);
                 return [];
@@ -55,28 +89,75 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
       controller: 'CategoryController'
     })
     .state('buildOrder.menuItem',{
-      url: '/menuItem/:categoryName',
+      url: '/menuItem/:orderId/:categoryName',
       templateUrl: 'modules/buildOrder/category/menuItem/menuItem.view.html',
       controller: 'MenuItemController',
+      params : {
+        order : null
+      },
       resolve:{
-        categories :function($http){
-          return $http.get('commons/JSONs/category.json')
+        categories :function(CategoryService){
+          return CategoryService.getCategories()
                 .then(function(response){
-                 return response.data;
-            });
+                  if(response.data.status =="ERROR"){
+                    console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                    return [];
+                  }
+                 return response.data.data;
+            },function(e){
+                console.log(e);
+                return [];
+          });
         },
-        menuItems : function($http){
-          return $http.get('commons/JSONs/menuItems.json')
-                .then(function(response){
-                 return response.data;
-            });
+        CurrentOrder :function($stateParams, OrderService){
+          var order = $stateParams.order || {};
+          var id  = $stateParams.orderId;
+          if(order.id && order.id !== null && order.id !== "") return order;
+          if(id === undefined || id == null || id === "") return {};
+          return OrderService.getOrder(id)
+                  .then(function(response){
+                    if(response.data.status =="ERROR"){
+                      console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                      return {};
+                    }
+                   return response.data.data;
+                  }, function(e){
+                    console.log(e);
+                    return {};
+                  });
+
+          return id;
         }
       }
     })
     .state('buildOrder.trackOrder',{
-      url: '/trackOrder',
+      url: '/trackOrder/:orderId',
       templateUrl: 'modules/buildOrder/trackOrder/trackOrder.view.html',
-      controller: 'OrderTrackerController'
+      controller: 'OrderTrackerController',
+      params : {
+        order : null
+      },
+      resolve : {
+        Order : function($stateParams, OrderService){
+          var order = $stateParams.order || {};
+          var id  = $stateParams.orderId;
+          if(order.id && order.id !== null && order.id !== "") return order;
+          return OrderService.getOrder(id)
+                  .then(function(response){
+                    if(response.data.status =="ERROR"){
+                      console.log(response.data.exception.errorCode +" : " + response.data.exception.message);
+                      return {};
+                    }
+                   return response.data.data;
+                  }, function(e){
+                    console.log(e);
+                    return {};
+                  });
+
+          return id;
+        }
+
+      }
     })
     .state('buildOrder.feedback', {
         url: '/feedback',

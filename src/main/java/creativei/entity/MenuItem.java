@@ -21,6 +21,8 @@ public class MenuItem extends BaseEntity implements Serializable {
     private DishType dishType;
     private String description;
     private Boolean isComboMeal = false;
+    @Transient
+    private String categoryName;
 
     public String getName() {
         return name;
@@ -76,5 +78,13 @@ public class MenuItem extends BaseEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.enums.OrderState;
 import creativei.enums.SpiceIndicator;
+import vo.modal.OrderVo;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,28 +13,47 @@ import java.util.List;
  * Created by Administrator on 26-03-2017.
  */
 @Entity
-@Table(name = "Customer_ORDER")
+@Table(name = "customer_order")
 public class Order extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String TableId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "table_id")
+    private RestaurantTable table;
     private String customization;
     private SpiceIndicator spiceIndicator;
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "Customer_Order")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItemList;
     private double subtotal;
     private OrderState orderState;
     private Date orderPunchTime;
     private Date orderCompletionTime;
+    private boolean isActive;
+    @Transient
+    private List<Long> orderItemIds;
+    @Transient
+    private Long tableId;
 
-    public String getTableId() {
-        return TableId;
+    public Order() {
     }
 
-    public void setTableId(String tableId) {
-        TableId = tableId;
+    public Order(OrderVo orderVo) {
+        this.id = orderVo.getId();
+        this.customization = orderVo.getCustomize();
+        this.isActive = orderVo.isActive();
+        this.orderState = OrderState.valueOf(orderVo.getState());
+        this.tableId = orderVo.getTableId();
+        this.subtotal = orderVo.getSubtotal();
+        this.spiceIndicator = orderVo.getSpiceIndicator();
+    }
+
+    public RestaurantTable getTable() {
+        return table;
+    }
+
+    public void setTable(RestaurantTable table) {
+        this.table = table;
     }
 
     public String getCustomization() {
@@ -98,5 +118,29 @@ public class Order extends BaseEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public List<Long> getOrderItemIds() {
+        return orderItemIds;
+    }
+
+    public void setOrderItemIds(List<Long> orderItemIds) {
+        this.orderItemIds = orderItemIds;
+    }
+
+    public Long getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(Long tableId) {
+        this.tableId = tableId;
     }
 }

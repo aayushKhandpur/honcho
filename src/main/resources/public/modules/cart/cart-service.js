@@ -28,23 +28,6 @@ creativei_app.factory('CartService', function($http, $rootScope, $localStorage, 
      return {message: "Item added", cart: cartItems };
   };
 
-  /*cart.addItem = function (menuItem, tableId){
-    console.log($localStorage);
-    console.log("Item added to cart.");
-    if(angular.isUndefined($rootScope.runningOrders) || $rootScope.runningOrders === null)
-      cart.initializeOrder();
-    if(!$rootScope.runningOrders.hasOwnProperty(tableId))
-      $rootScope.runningOrders[tableId] = getOrderTemplate(tableId);
-    var menuItemKey =menuItem.id;
-    var itemIndex = findItemIndex(menuItemKey, tableId);
-    if(itemIndex == -1){
-      $rootScope.runningOrders[tableId].items.push(getOrderItemFromMenuItem(menuItem));
-    }else{
-      updateOrderItemQuantity(itemIndex, menuItem.quantity, menuItem.price, tableId);
-      console.log($localStorage);
-    }
-    return {message: "Item added", item:menuItem };
-  };*/
   cart.updateItem = function(menuItemKey, quantity, price, tableId){
     updateOrderItemQuantity(findItemIndex(menuItemKey, tableId), quantity, price, tableId);
   };
@@ -84,11 +67,10 @@ creativei_app.factory('CartService', function($http, $rootScope, $localStorage, 
   }
   function getOrderTemplate(tableId){
     var order = {
-      table : tableId,
+      tableId : tableId,
       orderId: null,
       user  : "",
       customize : "",
-      spice :  "",
       items : []
     };
     return order;

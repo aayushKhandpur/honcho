@@ -1,8 +1,15 @@
 creativei_app.controller('MenuItemController', function ($scope, $filter, $uibModal, $stateParams
-  , $http, $state, $localStorage, $anchorScroll, $location, CartService, _, categories, menuItems) {
+  , $http, $state, $localStorage, $anchorScroll, $location, CartService, OrderService, _, categories, CurrentOrder) {
     console.log("Inside menu item controller.");
     $scope.tableId = $localStorage.currentTable;
-    $scope.order = $localStorage.runningOrders[$scope.tableId] || newOrder();
+    //TODO set $scope.order
+
+    $scope.order = (CurrentOrder == null || CurrentOrder === {}) ? getNewOrder() : CurrentOrder;
+    // if($localStorage.runningOrders && $localStorage.runningOrders != {}){
+    //   $scope.order = $localStorage.runningOrders[$scope.tableId] || getNewOrder();
+    // }else {
+    //   $scope.order = getNewOrder();
+    // }
     $scope.categories = categories;
     $scope.selectedCategory = $scope.categories[0];
     $scope.cartSize = 0;
@@ -10,20 +17,21 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
     $scope.menuItemList = [];
     $scope.cartItems =[];
     //$scope.subtotal = CartService.updateSubTotal($scope.cartItems);
-    if(menuItems.menuItem !== undefined){
-      $scope.menuItemList = menuItems.menuItem;
+    if(categories !== undefined){
       angular.forEach($scope.categories, function(category, key){
-        var menuItems = _.where($scope.menuItemList, {categoryID: category.Id});
-        category.menuItems = menuItems;
+        if(category.menuItems && category.menuItems.length >0){
+          $scope.menuItemList.push.apply($scope.menuItemList, category.menuItems);
+        }
       });
-      //sync cart and menu in case there is already an order
-      if($localStorage.runningOrders
-        && $localStorage.runningOrders[$scope.tableId]
-        && $localStorage.runningOrders[$scope.tableId].items){
-        syncMenuItemAndCartWithRoot();
-      }
-    }
 
+    }
+    //TODO sync cart and menu in case there is already an order
+    if($scope.order.items.length > 0) syncMenuItemAndCartWithRoot();
+    // if($localStorage.runningOrders
+    //   && $localStorage.runningOrders[$scope.tableId]
+    //   && $localStorage.runningOrders[$scope.tableId].items){
+    //   syncMenuItemAndCartWithRoot();
+    // }
     $localStorage.menuItemList = $scope.menuItemList;
 
     $scope.$watch('query.name', function(newValue, oldValue) {
@@ -90,12 +98,12 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
           }
         });
       });
-    //  $scope.cartItems = $rootScope.runningOrders[$scope.tableId].items;
       $scope.subtotal = CartService.updateSubTotal($scope.order.items);
     //if(orderItem.quantity == 0) delete $scope.cartItems[orderItem.id];
     };
     function syncMenuItemAndCartWithRoot(){
-      var items = $localStorage.runningOrders[$scope.tableId].items;
+      //var items = $localStorage.runningOrders[$scope.tableId].items;
+      var items = $scope.order.items;
       for(index in items){
         var orderItem = items[index];
         angular.forEach($scope.categories, function(category, key){
@@ -106,17 +114,17 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
           });
         });
       }
-      $scope.order.items = $localStorage.runningOrders[$scope.tableId].items;
+      //$scope.order.items = $localStorage.runningOrders[$scope.tableId].items;
       $scope.subtotal = CartService.updateSubTotal($scope.order.items);
     }
 
     //scroll function for the category dropdown
-    $scope.gotoAnchor = function(x) {
-        var newHash = 'anchor' + x;
-        if ($location.hash() !== newHash) {
+    $scope.gotoAnchor = function(category) {
+        var newHash = category.id;
+        if ($location.hash() !== category.name) {
             // set the $location.hash to `newHash` and
             // $anchorScroll will automatically scroll to it
-            $location.hash('anchor' + x);
+            $location.hash(category.name);
         } else {
             // call $anchorScroll() explicitly,
             // since $location.hash hasn't changed
@@ -125,28 +133,37 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
     };
 
     $scope.$watch('selectedCategory',function(newValue,oldValue){
-        console.log(newValue);
-        $scope.gotoAnchor(newValue.Id);
-
+        $anchorScroll('anchor'+ newValue.id);
+    //    $scope.gotoAnchor(newValue);
     });
-    function newOrder(){
+    function getNewOrder(){
       return {
-        table : $scope.tableId,
+        tableId : $scope.tableId,
         orderId: null,
         user  : "",
         customize : "",
-        spice :  "",
         items : []
       };
     }
     $scope.confirmOrder = function(){
-        //sync localStorag
-        if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
-        if(!$localStorage.runningOrders[$scope.tableId]){
-      //    $scope.order.items = $scope.order.items;
-          $localStorage.runningOrders[$scope.tableId] = $scope.order;
-        }
-      //  $localStorage.runningOrders[$scope.tableId].items = $scope.order.items;
-        $state.go('buildOrder.trackOrder');
+        //sync localStorage
+        $scope.order.subtotal = $scope.subtotal;
+        var data = $scope.order;
+        OrderService.saveOrder(data).then(function(response){
+          if(response.data.status == 'ERROR')
+          {
+            console.error();(response.data.exception.errorCode +" : " + response.data.exception.message);
+          }else{
+            console.log("Order created.");
+            if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
+            if(!$localStorage.runningOrders[$scope.tableId]){
+          //    $scope.order.items = $scope.order.items;
+              $localStorage.runningOrders[$scope.tableId] = $scope.order;
+            }
+          //  $localStorage.runningOrders[$scope.tableId].items = $scope.order.items;
+            $state.go('buildOrder.trackOrder');
+          }
+        });
+
     }
 });

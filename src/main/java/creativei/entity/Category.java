@@ -14,12 +14,13 @@ public class Category extends BaseEntity implements Serializable {
     private Long id;
     private String name;
     private Long parentId;
-    private int availableFromHour;
-    private int availableFromMin;
-    private int availableToHour;
-    private int availableToMin;
+    private String availableFromHour;
+    private String availableFromMin;
+    private String availableToHour;
+    private String availableToMin;
     private Boolean isAvailable = true;
     private int sequenceOrder = 100;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", targetEntity = MenuItem.class)
     private List<MenuItem> menuItemList;
 
@@ -51,35 +52,35 @@ public class Category extends BaseEntity implements Serializable {
         this.parentId = parentId;
     }
 
-    public int getAvailableFromHour() {
+    public String getAvailableFromHour() {
         return availableFromHour;
     }
 
-    public void setAvailableFromHour(int availableFromHour) {
+    public void setAvailableFromHour(String availableFromHour) {
         this.availableFromHour = availableFromHour;
     }
 
-    public int getAvailableFromMin() {
+    public String getAvailableFromMin() {
         return availableFromMin;
     }
 
-    public void setAvailableFromMin(int availableFromMin) {
+    public void setAvailableFromMin(String availableFromMin) {
         this.availableFromMin = availableFromMin;
     }
 
-    public int getAvailableToHour() {
+    public String getAvailableToHour() {
         return availableToHour;
     }
 
-    public void setAvailableToHour(int availableToHour) {
+    public void setAvailableToHour(String availableToHour) {
         this.availableToHour = availableToHour;
     }
 
-    public int getAvailableToMin() {
+    public String getAvailableToMin() {
         return availableToMin;
     }
 
-    public void setAvailableToMin(int availableToMin) {
+    public void setAvailableToMin(String availableToMin) {
         this.availableToMin = availableToMin;
     }
 

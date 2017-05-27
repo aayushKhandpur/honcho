@@ -8,28 +8,28 @@
     <!--filter ends here-->
     <!--Table detail starts here-->
     <div class="row">
-        <div class="col-md-3 col-sm-6" ng-repeat="table in tables | filter:tableFilterFunction | orderBy : 'tableNo'">
-            <div ng-if="table.isAvailable == false" class="table tableOccupied">
+        <div class="col-md-3 col-sm-6" ng-repeat="table in tables | filter:tableFilterFunction | orderBy : 'tableNumber'">
+            <div ng-hide="table.isAvailable" class="table tableOccupied" ng-click="manage(table.order.id, table.id)">
                 <div class="media">
                     <div class="media-left tableNo">
-                        <div class="media-object">{{table.tableNo}}</div>
+                        <div class="media-object">{{table.tableNumber}}</div>
                     </div>
                     <div class="media-body tableDetail">
-                        <div>Occupancy<span class="label label-success pull-right">{{table.tableOccupancy}}</span></div>
-                        <div>Status<span class="label label-info pull-right">{{table.tableStatus}}</span></div>
+                        <div>Occupancy<span class="label label-success pull-right">{{table.occupancy}}</span></div>
+                        <div>Status<span class="label label-info pull-right">{{table.order.state}}</span></div>
                         <div>Occupied For<span class="label label-warning pull-right">{{table.tableOccupiedDuration}}</span></div>
                     </div>
                 </div>
             </div>
-            <div ng-if="table.isAvailable == true" class="table tableAvailable">
+            <div ng-show="table.isAvailable" class="table tableAvailable">
                 <div class="media">
                     <div class="media-left tableNo">
-                        <div class="media-object">{{table.tableNo}}</div>
+                        <div class="media-object">{{table.tableNumber}}</div>
                     </div>
                     <div class="media-body tableDetail">
-                        <div>Occupancy<span class="label label-success pull-right">{{table.tableOccupancy}}</span></div>
+                        <div>Occupancy<span class="label label-success pull-right">{{table.occupancy}}</span></div>
                         <br>
-                        <button class="btn btn-success assignButton" ng-click="assign(table.tableNo)">Assign</button>
+                        <button class="btn btn-success assignButton" ng-click="assign(table.id)">Assign</button>
                     </div>
                 </div>
             </div>
