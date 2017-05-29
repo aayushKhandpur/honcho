@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderService {
     public List<Order> findOrderByState(OrderState orderState);
     public Order findOrder(Long id) throws Exception;
-    public Order updateOrder(Order order);
+    public Order updateOrder(Order order) throws Exception;
     public Order createOrder(Order order) throws Exception;
     public List<Order> findOrderByIsActive(boolean isActive);
 

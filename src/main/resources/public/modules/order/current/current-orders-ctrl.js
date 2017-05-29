@@ -60,7 +60,7 @@ creativei_app.controller('CurrentOrdersController', function($scope,$http, $stat
 
     $scope.manage = function(id, tableId){
       $localStorage.currentTable = tableId;
-      $state.go('buildOrder.trackOrder', {id : orderId});
+      $state.go('buildOrder.trackOrder', {id : id});
     }
     //end filter implementation
     //dummy json for tables

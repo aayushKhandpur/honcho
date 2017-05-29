@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.enums.OrderState;
 import creativei.enums.SpiceIndicator;
+import org.apache.commons.lang3.StringUtils;
 import vo.modal.OrderVo;
 
 import javax.persistence.*;
@@ -42,7 +43,10 @@ public class Order extends BaseEntity implements Serializable {
         this.id = orderVo.getId();
         this.customization = orderVo.getCustomize();
         this.isActive = orderVo.isActive();
-        this.orderState = OrderState.valueOf(orderVo.getState());
+        if(StringUtils.isNotBlank(orderVo.getState())){
+            this.orderState = OrderState.valueOf(orderVo.getState().toUpperCase());
+        }
+        //this.orderState = OrderState.valueOf();
         this.tableId = orderVo.getTableId();
         this.subtotal = orderVo.getSubtotal();
         this.spiceIndicator = orderVo.getSpiceIndicator();

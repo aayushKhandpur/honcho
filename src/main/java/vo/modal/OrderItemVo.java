@@ -1,12 +1,7 @@
 package vo.modal;
 
-import creativei.entity.MenuItem;
-import creativei.entity.Order;
+import creativei.enums.OrderItemState;
 import creativei.enums.SpiceIndicator;
-
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  * Created by Administrator on 09-05-2017.
@@ -14,13 +9,15 @@ import javax.persistence.ManyToOne;
 public class OrderItemVo {
     private Long id;
     private Long menuItemId;
-    private String customization;
+    private String customize;
     private SpiceIndicator spiceIndicator = SpiceIndicator.STANDARD;
     private int quantity;
     private double rate;
     private String name;
     private double price;
     private boolean isVeg;
+    private Long orderId;
+    private String itemState = OrderItemState.ADDED.toString();
 
     public Long getId() {
         return id;
@@ -30,12 +27,12 @@ public class OrderItemVo {
         this.id = id;
     }
 
-    public String getCustomization() {
-        return customization;
+    public String getCustomize() {
+        return customize;
     }
 
-    public void setCustomization(String customization) {
-        this.customization = customization;
+    public void setCustomize(String customize) {
+        this.customize = customize;
     }
 
     public SpiceIndicator getSpiceIndicator() {
@@ -92,5 +89,21 @@ public class OrderItemVo {
 
     public void setVeg(boolean veg) {
         isVeg = veg;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getItemState() {
+        return itemState;
+    }
+
+    public void setItemState(String itemState) {
+        this.itemState = itemState;
     }
 }

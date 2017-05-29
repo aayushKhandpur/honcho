@@ -67,7 +67,19 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     public ResponseObject updateOrder(Order order) {
-        return null;
+        ResponseObject responseObject = null;
+        try {
+            order = orderService.updateOrder(order);
+            responseObject = new ResponseObject(getActiveOrderJson(order));
+            responseObject.setStatus(ResponseObject.ResponseStatus.SUCCESS);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            Error error = new Error("1001", ex.getMessage());
+            responseObject = new ResponseObject(error);
+            responseObject.setStatus(ResponseObject.ResponseStatus.ERROR);
+        } finally {
+            return responseObject;
+        }
     }
 
     @Override

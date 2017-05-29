@@ -1,5 +1,6 @@
 package creativei.entity;
 
+import creativei.enums.OrderItemState;
 import creativei.enums.SpiceIndicator;
 import vo.modal.OrderItemVo;
 
@@ -35,6 +36,8 @@ public class OrderItem extends BaseEntity implements Serializable {
 
     private double price;
 
+    private OrderItemState itemState;
+
     public OrderItem() {
     }
 
@@ -42,14 +45,22 @@ public class OrderItem extends BaseEntity implements Serializable {
         this.name = orderItemVo.getName();
         this.id = orderItemVo.getId();
         this.spiceIndicator = orderItemVo.getSpiceIndicator();
-        this.customization = orderItemVo.getCustomization();
+        this.customization = orderItemVo.getCustomize();
         this.quantity = orderItemVo.getQuantity();
         this.rate = orderItemVo.getRate();
         this.price = orderItemVo.getPrice();
         this.menuItem = new MenuItem();
         this.menuItem.setId(orderItemVo.getMenuItemId());
+        this.itemState = OrderItemState.ADDED;
     }
 
+    public OrderItemState getItemState() {
+        return itemState;
+    }
+
+    public void setItemState(OrderItemState itemState) {
+        this.itemState = itemState;
+    }
 
     public MenuItem getMenuItem() {
         return menuItem;

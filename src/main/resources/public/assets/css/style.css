@@ -73,7 +73,7 @@ body {
 
 .formInput {
     width: 100%;
-    font-family: "Microsoft Sans Serif";
+    font-family: "Open Sans";
     color: rgba(2, 17, 44, 1.00);
     background: none;
     outline: none;
@@ -91,14 +91,14 @@ body {
     width: 100%;
     background-color: #05132c !important;
     color: white;
-    font-family: "Microsoft Sans Serif";
+    font-family: "Open Sans";
     border-radius: 10px;
     border: none;
     outline: none;
 }
 
 #continueAsGuest {
-    font-family: "Microsoft Sans Serif";
+    font-family: "Open Sans";
     color: rgba(2, 17, 44, 1.00);
     text-decoration: underline;
 }
@@ -397,12 +397,12 @@ body {
             -webkit-transition: 0.3s;
             transition: 0.3s;
         }
-        
+
         .sidenav a:hover,
         .offcanvas a:focus {
             color: #f1f1f1;
         }
-        
+
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -416,13 +416,13 @@ body {
         .sideMenuWaitingIcon {
             width: 20px;
         }
-        
+
         #main {
             -webkit-transition: margin-left .5s;
             transition: margin-left .5s;
             padding: 16px;
         }
-        
+
         @media screen and (max-height: 450px) {
             .sidenav {
                 padding-top: 15px;
@@ -553,7 +553,7 @@ color: #f12f63;
 #addButton {
     background-color: #05132c !important;
     color: white;
-    font-family: "Microsoft Sans Serif";
+    font-family: "Open Sans";
     border-radius: 10px;
     border: none;
     outline: none;

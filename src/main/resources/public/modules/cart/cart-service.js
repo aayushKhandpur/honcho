@@ -1,10 +1,10 @@
 creativei_app.factory('CartService', function($http, $rootScope, $localStorage, _ ){
   var cart = {};
-  cart.initializeOrder = function (){
-    if($rootScope.runningOrders === undefined )
-      $rootScope.runningOrders = {};
-    // TODO call server to fetch current running orders
-  };
+  // cart.initializeOrder = function (){
+  //   if($rootScope.runningOrders === undefined )
+  //     $rootScope.runningOrders = {};
+  //   // TODO call server to fetch current running orders
+  // };
   /*
   *To add a menu item to the cart. Returns the
   */

@@ -161,13 +161,13 @@ creativei_app.controller('MenuItemController', function ($scope, $filter, $uibMo
             console.error();(response.data.exception.errorCode +" : " + response.data.exception.message);
           }else{
             console.log("Order created.");
-            if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
-            if(!$localStorage.runningOrders[$scope.tableId]){
-          //    $scope.order.items = $scope.order.items;
-              $localStorage.runningOrders[$scope.tableId] = $scope.order;
-            }
+            // if(!$localStorage.runningOrders) $localStorage.runningOrders = {};
+          //   if(!$localStorage.runningOrders[$scope.tableId]){
+          // //    $scope.order.items = $scope.order.items;
+          //     $localStorage.runningOrders[$scope.tableId] = $scope.order;
+          //   }
           //  $localStorage.runningOrders[$scope.tableId].items = $scope.order.items;
-            $state.go('buildOrder.trackOrder');
+            $state.go('buildOrder.trackOrder', {id : response.data.data.id, order : response.data.data});
           }
         });
 

@@ -113,6 +113,8 @@ public class ActiveOrderResponse {
         private int quantity;
         private double rate;
         private double price;
+        private String itemState;
+
 
         public OrderItemResponse(){
 
@@ -127,6 +129,7 @@ public class ActiveOrderResponse {
             this.quantity = orderItem.getQuantity();
             this.rate = orderItem.getRate();
             this.price = orderItem.getPrice();
+            this.itemState = orderItem.getItemState().toString();
         }
 
         public long getId() {
@@ -191,6 +194,14 @@ public class ActiveOrderResponse {
 
         public void setPrice(double price) {
             this.price = price;
+        }
+
+        public String getItemState() {
+            return itemState;
+        }
+
+        public void setItemState(String itemState) {
+            this.itemState = itemState;
         }
     }
 }

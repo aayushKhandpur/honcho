@@ -79,6 +79,26 @@ public class OrderController {
 
     }
 
+    @RequestMapping(value = "/order/update", produces = "application/json", method = RequestMethod.PUT)
+    public
+    @ResponseBody
+    ResponseObject updateOrder(@RequestBody String orderStr, HttpServletRequest request) {
+        logger.info("Request to save order.");
+        try {
+            OrderVo orderVo = mapper.readValue(orderStr, new TypeReference<OrderVo>(){});
+            Order order = new Order(orderVo);
+            order.setOrderItemList(getOrderItems(orderVo.getItems(), order));
+            return orderManager.updateOrder(order);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            Error er = new Error("1001", e.getMessage());
+            ResponseObject ro = new ResponseObject(er);
+            ro.setStatus(ResponseObject.ResponseStatus.ERROR);
+            return ro;
+        }
+
+    }
+
     private List<OrderItem> getOrderItems(List<OrderItemVo> orderItemVos, Order order){
         if(orderItemVos!=null && !orderItemVos.isEmpty()){
             List<OrderItem> orderItems = new ArrayList();

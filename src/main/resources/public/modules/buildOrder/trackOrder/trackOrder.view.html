@@ -40,7 +40,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="updateCartItemWrapper" ng-repeat="value in cartItems | orderBy:'name'">
+                                            <div class="updateCartItemWrapper" ng-repeat="value in order.items | orderBy:'name'">
                                                 <div class="row updateCartItem">
                                                     <div class="col-md-12">
                                                         <div class="row orderCartItemName">
@@ -48,9 +48,9 @@
                                                         </div>
                                                         <div class="row updateCartItemDetails">
                                                             <div class="col-md-4 col-sm-5 updateCartItemQuantity">
-                                                                <button class="orderQuantityButton">-</button>
+                                                                <button class="orderQuantityButton" ng-click="updateOrderItemAndSync(value,'REMOVE')">-</button>
                                                                 <input class="orderQuantityIndicator" value="{{value.quantity}}" readonly/>
-                                                                <button class="orderQuantityButton">+</button>
+                                                                <button class="orderQuantityButton" ng-click="updateOrderItemAndSync(value,'ADD')">+</button>
                                                             </div>
                                                             <div class="col-md-4 col-sm-4 updateCartItemRate">x{{value.rate}}</div>
                                                             <div class="col-md-4 col-sm-3 text-right updateCartItemAmount">&#8377;{{value.rate * value.quantity}}</div>
@@ -68,11 +68,11 @@
                                 <div class="orderCartFooterInnerWrapper col-md-12">
                                     <div class="row orderCartSubtotal">
                                         <div class="col-md-6 col-sm-6">Subtotal</div>
-                                        <div class="col-md-6 col-sm-6 text-right">&#8377;{{subtotal}}</div>
+                                        <div class="col-md-6 col-sm-6 text-right">&#8377;{{order.subtotal}}</div>
                                     </div>
                                     <div class="row orderCartUpdate">
                                         <div class="col-md-12">
-                                            <button class="text-center orderCartButton">UPDATE CART</button>
+                                            <button class="text-center orderCartButton" ng-click="updateOrder();">UPDATE CART</button>
                                         </div>
                                     </div>
                                 </div>

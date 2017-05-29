@@ -8,12 +8,21 @@ creativei_app.factory('OrderService', function($http){
         });
     },
     saveOrder: function(order){
-      return $http({
-        method: 'POST',
-        url: baseUrl + '/order/save',
-        data: order,
-        headers: {'Content-Type': 'application/json'}
-      });
+      if(order.id != null && order.id != ""){
+        return $http({
+          method: 'PUT',
+          url: baseUrl + '/order/update',
+          data: order,
+          headers: {'Content-Type': 'application/json'}
+        });
+      }else{
+        return $http({
+          method: 'POST',
+          url: baseUrl + '/order/save',
+          data: order,
+          headers: {'Content-Type': 'application/json'}
+        });
+      }
     },
     getOrder: function(orderId){
       return $http({

@@ -96,7 +96,8 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
         order : null
       },
       resolve:{
-        categories :function(CategoryService){
+        categories :function(CategoryService, $localStorage){
+          if($localStorage.categories != null && $localStorage.categories.length > 0) return $localStorage.categories;
           return CategoryService.getCategories()
                 .then(function(response){
                   if(response.data.status =="ERROR"){
@@ -183,21 +184,21 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
 creativei_app.controller("MainController",function($scope, $rootScope, $state, $location, $localStorage){
   $scope.$storage = $localStorage;
   //sync running orders with rootScope
-  if($localStorage.runningOrders){
-    if($rootScope.runningOrders === undefined || $rootScope.runningOrders === {}){
-      $rootScope.runningOrders = $localStorage.runningOrders;
-    }
-  }else{
-    $localStorage.runningOrders = {};
-  }
+  // if($localStorage.runningOrders){
+  //   if($rootScope.runningOrders === undefined || $rootScope.runningOrders === {}){
+  //     $rootScope.runningOrders = $localStorage.runningOrders;
+  //   }
+  // }else{
+  //   $localStorage.runningOrders = {};
+  // }
 
   $rootScope.$on('$stateChangeStart',
   function(event, toState, toParams, fromState, fromParams, options){
     if(toState.name == "logout"){
       delete $rootScope.isAuthenticated;
       delete $scope.$storage.isAuthenticated;
-      delete $rootScope.runningOrders;
-      delete $scope.$storage.runningOrders;
+      // delete $rootScope.runningOrders;
+      // delete $scope.$storage.runningOrders;
       return;
     }
     if(toState.name === "login"){
