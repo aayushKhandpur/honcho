@@ -178,7 +178,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
     .state('kot', {
         url: '/kot',
         templateUrl: 'modules/kot/kot.view.html',
-        controller: 'kotController'
+        controller: 'KOTController'
     });
     $urlRouterProvider.otherwise('/services');
 

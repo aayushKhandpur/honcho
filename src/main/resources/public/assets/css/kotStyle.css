@@ -1,5 +1,4 @@
 .activeOrdersColumn {
-	background: #1dab76;
     height: 50px;
 }
 
@@ -13,18 +12,9 @@
 	background: white;
     border: 2px solid whitesmoke;
 }
-/*
-.tableNoTimeColumn {
-    height: 50px;
-}
-.tableNoTimeRow {
-    line-height: 5rem;
-}
-*/
+
 .OrderItemRow {
     border-top: 1px solid lightgrey;
-/*    height: 3rem;*/
-/*    line-height: 3rem;*/
     padding: 0.3rem 0rem;
 }
 .orderItemName{
@@ -34,17 +24,12 @@
 .orderItemDone{
     text-decoration: line-through;
 }
-.orderItemStatus {
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
-}
 
 .orderTypeItemRow {
     margin-bottom: 0.50rem;
 }
 
 .tableNoTimeColumn {
-    background-color: gainsboro;
     font-weight: bolder;
 }
 
