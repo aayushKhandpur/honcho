@@ -1,0 +1,47 @@
+.activeOrdersColumn {
+    height: 50px;
+}
+
+.activeOrders {
+	line-height: 50px;
+    font-size: 1.3em;
+    color: white;
+}
+
+.wrapperColumn {
+	background: white;
+    border: 2px solid whitesmoke;
+}
+
+.OrderItemRow {
+    border-top: 1px solid lightgrey;
+    padding: 0.3rem 0rem;
+}
+.orderItemName{
+    line-height: normal;
+    word-wrap: break-word;
+}
+.orderItemDone{
+    text-decoration: line-through;
+}
+
+.orderTypeItemRow {
+    margin-bottom: 0.50rem;
+}
+
+.tableNoTimeColumn {
+    font-weight: bolder;
+}
+
+.orderItemColumn {
+    height: 150px;
+    overflow: auto;
+}
+
+.layoutSelectorLabel {
+    color: white;
+}
+
+.layoutSelectorWrapper {
+    line-height: 50px;
+}

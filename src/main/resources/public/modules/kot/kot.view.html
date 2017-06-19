@@ -1,0 +1,1028 @@
+<link rel="stylesheet" href="../../assets/css/kotStyle.css">
+<div ng-controller="KOTController" ng-cloak>
+    <div class="row">
+        <div class="col-md-12 activeOrdersColumn greenColor">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-5 text-center">
+                    <p class="activeOrders">Active Orders</p>
+                </div>
+                <div class="col-md-2 pull-right text-center">
+                    <div class="layoutSelectorWrapper">
+                        <label for="layoutSelect" class="layoutSelectorLabel"> Layout : </label>
+                        <select name="layoutSelect" id="layoutSelect" ng-model="kotLayout.selectedPreset">
+                            <option ng-repeat="option in kotLayout.availablePreset" value="{{option.column}}">{{option.layout}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#1</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">11</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">7.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Pav Bhaji</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">8.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Onion Uttapam</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">9.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Veg. Fried Rice</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">10.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Dhania Shorba</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">11.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Masala Dosa</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#2</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#3</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">7</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">7.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Pav Bhaji</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#4</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">1</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x4</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#5</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">2</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#6</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">8</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">7.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Pav Bhaji</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">8.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Onion Uttapam</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#7</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">4</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#8</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#9</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">10</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">7.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Pav Bhaji</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">8.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Onion Uttapam</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">9.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Veg. Fried Rice</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">10.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Dhania Shorba</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#10</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">10</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">7.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Pav Bhaji</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">8.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Onion Uttapam</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">9.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Veg. Fried Rice</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">10.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Dhania Shorba</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#11</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">5</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#12</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">5</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#13</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">1</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x4</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#14</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#15</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">2</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#16</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">2</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#17</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#18</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#19</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#20</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#21</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">2.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Pakoda</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">3.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Paneer Tikka</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">4.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Chole Bhature</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">5.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Bombay Bhel</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <div class="col-xs-2 orderItemIndex">6.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Tomato Soup</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x1</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+        <!--column first starts from here-->
+        <div class="col-md-{{kotLayout.selectedPreset}} col-sm-4 wrapperColumn">
+            <!--wrapper row starts from here-->
+            <div class="row">
+                <!--wrapper inner starts from here-->
+                <div class="col-md-12 wrapperInner">
+                    <div class="row">
+                        <div class="col-xs-12 tableNoTimeColumn greyColor">
+                            <div class="row tableNoTimeRow">
+                                <div class="col-xs-6">#22</div>
+                                <div class="col-xs-6 text-right">HH:MM</div>
+                            </div>
+                            <div class="row orderTypeItemRow">
+                                <div class="col-xs-6"><span class="label label-primary orderType">Dine-In</span></div>
+                                <div class="col-xs-6 text-right">Items <span class="badge orderItems">1</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 orderItemColumn" style="height : {{getHeight();}}">
+                            <div class="row OrderItemRow">
+                                <div class="col-xs-2 orderItemIndex">1.</div>
+                                <div class="col-xs-8 orderItemName orderItemDone">Vada Pav</div>
+                                <div class="col-xs-2 orderItemQuantity orderItemDone">x4</div>
+                                <!--<div class="col-xs-2 text-center"><input class="orderItemStatus" type="checkbox" name="order" value="table#1" checked></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--wrapper inner ends here-->
+            </div>
+            <!--wrapper row ends here-->
+        </div>
+        <!--column first ends here-->
+    </div>
+</div>

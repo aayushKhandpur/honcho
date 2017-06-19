@@ -174,6 +174,11 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
         url: '/logout',
         templateUrl: 'modules/logout/logout.view.html',
         controller: 'logoutController'
+    })
+    .state('kot', {
+        url: '/kot',
+        templateUrl: 'modules/kot/kot.view.html',
+        controller: 'KOTController'
     });
     $urlRouterProvider.otherwise('/services');
 
