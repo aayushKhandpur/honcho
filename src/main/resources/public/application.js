@@ -1,5 +1,5 @@
 var baseUrl = window.location.protocol + '//' + window.location.host;
-var creativei_app= angular.module("creativei_app",['ui.router','ngStorage','ui.bootstrap','ngAnimate', 'angucomplete-alt'])
+var creativei_app= angular.module("creativei_app",['ui.router','ngStorage','ui.bootstrap','ngAnimate', 'angucomplete-alt', 'angular-loading-bar'])
 creativei_app.constant('_',
     window._
 );
