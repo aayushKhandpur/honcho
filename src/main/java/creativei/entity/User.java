@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import creativei.enums.UserRole;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +13,34 @@ import java.io.Serializable;
  */
 
 @Entity
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String userId;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private UserRole userRole;
 
     public User (){}
     public User(String name) {
         this.name = name;
+    }
+
+    public User(String userId, String password, UserRole role, String name){
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.userRole = role;
     }
 
     public long getId() {
@@ -34,11 +59,27 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue
-    private long id;
+    public String getUserId() {
+        return userId;
+    }
 
-    @Column(nullable = false)
-    private String name;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 }

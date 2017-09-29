@@ -4,6 +4,7 @@ import creativei.dao.RestaurantTableDao;
 import creativei.dao.UserDao;
 import creativei.entity.RestaurantTable;
 import creativei.entity.User;
+import creativei.enums.UserRole;
 import creativei.manager.RestaurantTableManager;
 import creativei.manager.impl.RestaurantManagerImpl;
 import creativei.manager.impl.RestaurantTableManagerImpl;
@@ -11,12 +12,19 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import vo.Error;
 import vo.Hello;
 import vo.ResponseObject;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +40,13 @@ public class RestaurantController {
     RestaurantTableManager restaurantTableManager;
     private static final Logger logger = LoggerFactory
             .getLogger(RestaurantController.class);
-
+    @RequestMapping("/user")
+    public Object user(Authentication user) {
+        if(user != null){
+            return user.getPrincipal();
+        }
+        return null;
+    }
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.POST)
     public
     @ResponseBody ResponseObject autheticateUser(@RequestBody Map<String,String> credentials){
@@ -56,13 +70,14 @@ public class RestaurantController {
         Long restaurantId = 101L;
         return restaurantManager.getRestaurant();
     }
-
     @RequestMapping(value = "/restaurant/services", produces = "application/json", method = RequestMethod.GET)
     public
     @ResponseBody
-    ResponseObject getservices(HttpServletRequest request) {
+    ResponseObject getservices(Authentication user, HttpServletRequest request) {
+        List<SimpleGrantedAuthority> userRoles = (List<SimpleGrantedAuthority>)user.getAuthorities();
+        String authority = userRoles.get(0).getAuthority();
         Long restaurantId = 101L;
-        return restaurantManager.getServices(restaurantId);
+        return restaurantManager.getServices(restaurantId, UserRole.valueOf(authority.toUpperCase()));
     }
 
     @RequestMapping(value = "/restaurant/tables", produces = "application/json", method = RequestMethod.GET)

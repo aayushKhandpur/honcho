@@ -17,7 +17,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
                   if(response.data.data){
                     return response.data.data
                   }else{
-                    console.log(response.data.exception.status+": "+response.data.exception.message);
+                    //console.log(response.data.exception.status+": "+response.data.exception.message);
                     return [];
                   }
                 },function(response){
@@ -67,10 +67,11 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
         }
       }
     })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'modules/authenticate/authenticate.view.html',
-      controller: 'AuthController'
+    .state('home', {
+      url: '/',
+      //templateUrl: 'login.html',
+      controller: 'LoginCtrl'
+
     })
     .state('buildOrder',{
       url: '/buildOrder',
@@ -180,14 +181,35 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
         templateUrl: 'modules/kot/kot.view.html',
         controller: 'KOTController'
     });
-    $urlRouterProvider.otherwise('/services');
+    //$urlRouterProvider.otherwise('/login');
 
 
 });
 
+// Login.js
+creativei_app.controller('LoginCtrl', function($scope, $rootScope,$window,  $http) {
+    console.log("inside login controller..");
+    $scope.user = function () {
+        console.log("GET USER..")
+        // $http({
+        //     method:'POST',
+        //     url:'/j_spring_security_check',
+        //     params:{'j_username':$scope.username,'j_password':$scope.password,'ajax':true}
+        // })
+        //     .success(function(data) {
+        //         alert("success"); // always success
+        //     })
+        //     .error(function(data) {
+        //         alert("error");
 
-creativei_app.controller("MainController",function($scope, $rootScope, $state, $location, $localStorage){
+        //     });
+    };
+    $scope.user();
+});
+
+creativei_app.controller("MainController",function($scope, $rootScope, $state, $location, $localStorage, $http){
   $scope.$storage = $localStorage;
+
   //sync running orders with rootScope
   // if($localStorage.runningOrders){
   //   if($rootScope.runningOrders === undefined || $rootScope.runningOrders === {}){
@@ -206,13 +228,13 @@ creativei_app.controller("MainController",function($scope, $rootScope, $state, $
       // delete $scope.$storage.runningOrders;
       return;
     }
-    if(toState.name === "login"){
-      if($scope.$storage.isAuthenticated){
-        $rootScope.isAuthenticated = $scope.$storage.isAuthenticated;
-        $location.path("/services");
-        return;
-      }
-    }
+    // if(toState.name === "login"){
+    //   if($scope.$storage.isAuthenticated){
+    //     $rootScope.isAuthenticated = $scope.$storage.isAuthenticated;
+    //     $location.path("/services");
+    //     return;
+    //   }
+    // }
 
     if($rootScope.isAuthenticated)
       return;
@@ -220,7 +242,20 @@ creativei_app.controller("MainController",function($scope, $rootScope, $state, $
       $rootScope.isAuthenticated = $scope.$storage.isAuthenticated;
       return;
     }
-    $location.path("/login");
+        console.log("GET USER..")
+        $http({
+            method:'GET',
+            url:'/user',
+        })
+            .success(function(data) {
+                console.log(data);
+                $rootScope.isAuthenticated = $scope.$storage.isAuthenticated = true;
+                $state.go('services');
+            })
+            .error(function(data) {
+                alert("error");
+                console.log(data);
+            });
   });
 
 });

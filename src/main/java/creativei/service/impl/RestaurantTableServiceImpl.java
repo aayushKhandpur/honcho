@@ -6,6 +6,7 @@ import creativei.service.RestaurantTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,11 @@ public class RestaurantTableServiceImpl implements RestaurantTableService{
 
     @Override
     public List<RestaurantTable> getAll() {
-        List<RestaurantTable> tables = restaurantTableDao.findAll();
-        updateTableCache(tables);
-        return tables;
+        if(tableCache.isEmpty()){
+            List<RestaurantTable> tables = restaurantTableDao.findAll();
+            updateTableCache(tables);
+        }
+        return new ArrayList<RestaurantTable>(tableCache.values());
     }
 
     @Override

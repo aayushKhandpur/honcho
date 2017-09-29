@@ -7,6 +7,9 @@ creativei_app.controller("ServicesController", function ($scope, $state,$localSt
         case 'ORDER':
           $state.go('order.current');
           break;
+          case 'KOT':
+          $state.go('kot');
+          break;
         default:
           console.log("no state selected.");
       }
