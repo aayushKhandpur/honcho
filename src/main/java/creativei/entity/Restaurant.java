@@ -1,10 +1,8 @@
 package creativei.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 23-01-2017.
@@ -18,6 +16,8 @@ public class Restaurant extends BaseEntity implements Serializable {
     private String city;
     private String addressLine1;
     private String addressLine2;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<FplusUser> user;
 
     public String getName() {
         return name;
@@ -57,5 +57,13 @@ public class Restaurant extends BaseEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<FplusUser> getUser() {
+        return user;
+    }
+
+    public void setUser(List<FplusUser> user) {
+        this.user = user;
     }
 }

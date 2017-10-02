@@ -2,12 +2,11 @@ package creativei;
 
 
 import creativei.dao.UserDao;
-import creativei.entity.User;
-import creativei.enums.UserRole;
+import creativei.entity.AuthUser;
+import creativei.entity.FplusUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,8 +24,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -46,9 +43,9 @@ public class ApplicationConfiguration{
             @Override
             public void run(String... arg0) throws Exception {
 
-                userDao.save(new User("admin", "password", UserRole.ADMIN, "Admin"));
-                userDao.save(new User("kitchen", "password", UserRole.KITCHEN, "Kitchen"));
-                userDao.save(new User("service", "password", UserRole.SERVICE, "Waiter 1"));
+                userDao.save(new FplusUser("admin", "password", UserRole.ADMIN, "Admin"));
+                userDao.save(new FplusUser("kitchen", "password", UserRole.KITCHEN, "Kitchen"));
+                userDao.save(new FplusUser("service", "password", UserRole.SERVICE, "Waiter 1"));
             }
 
         };
@@ -61,28 +58,12 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    UserDetailsService userDetailsService;
+
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
-    }
-
-    @Bean
-    UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                User account = userDao.findByUserId(username);
-                if(account != null) {
-                    return new org.springframework.security.core.userdetails.User(account.getUserId(), account.getPassword(), true, true, true, true,
-                            AuthorityUtils.createAuthorityList(account.getUserRole().toString()));
-                } else {
-                    throw new UsernameNotFoundException("could not find the user '"
-                            + username + "'");
-                }
-            }
-
-        };
+        auth.userDetailsService(userDetailsService);
     }
 }
 
@@ -101,7 +82,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and().exceptionHandling().accessDeniedPage("/");;
+                .and().exceptionHandling().accessDeniedPage("/");
         /*http.authorizeRequests().antMatchers("*//**").authenticated().anyRequest().permitAll().and().
                 formLogin().and().
                 httpBasic().and().

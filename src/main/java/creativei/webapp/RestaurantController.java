@@ -1,35 +1,30 @@
 package creativei.webapp;
 
+import creativei.RestaurantConfig;
 import creativei.dao.RestaurantTableDao;
 import creativei.dao.UserDao;
-import creativei.entity.RestaurantTable;
-import creativei.entity.User;
 import creativei.enums.UserRole;
 import creativei.manager.RestaurantTableManager;
 import creativei.manager.impl.RestaurantManagerImpl;
-import creativei.manager.impl.RestaurantTableManagerImpl;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import vo.Error;
-import vo.Hello;
 import vo.ResponseObject;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class RestaurantController {
+
+    @Autowired
+    RestaurantConfig serviceConfig;
+
     @Autowired
     UserDao userDao;
     @Autowired
@@ -38,6 +33,7 @@ public class RestaurantController {
     RestaurantManagerImpl restaurantManager;
     @Autowired
     RestaurantTableManager restaurantTableManager;
+
     private static final Logger logger = LoggerFactory
             .getLogger(RestaurantController.class);
     @RequestMapping("/user")
@@ -74,6 +70,7 @@ public class RestaurantController {
     public
     @ResponseBody
     ResponseObject getservices(Authentication user, HttpServletRequest request) {
+
         List<SimpleGrantedAuthority> userRoles = (List<SimpleGrantedAuthority>)user.getAuthorities();
         String authority = userRoles.get(0).getAuthority();
         Long restaurantId = 101L;

@@ -1,6 +1,6 @@
 package creativei.dao;
 
-import creativei.entity.User;
+import creativei.entity.FplusUser;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
@@ -11,15 +11,15 @@ import java.util.List;
  */
 
 @Transactional
-public interface UserDao extends CrudRepository<User, Long>{
+public interface UserDao extends CrudRepository<FplusUser, Long>{
     /**
      * Return the user having the passed email or null if no user is found.
      *
      * @param email the user email.
      */
-    public List<User> findByName(String email);
+    public List<FplusUser> findByName(String email);
 
-    public User findByUserId(String userId);
+    public FplusUser findByUserId(String userId);
 
 }
 

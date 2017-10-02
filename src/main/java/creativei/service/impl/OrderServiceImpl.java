@@ -1,5 +1,6 @@
 package creativei.service.impl;
 
+import creativei.RestaurantConfig;
 import creativei.dao.OrderDao;
 import creativei.entity.Order;
 import creativei.entity.OrderItem;
@@ -12,15 +13,16 @@ import creativei.service.RestaurantTableService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -36,6 +38,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDao orderDao;
 
     @Autowired
+    @Lazy
+    @Resource(name = RestaurantConfig.tableService)
     RestaurantTableService restaurantTableService;
 
     @Autowired

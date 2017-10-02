@@ -1,5 +1,6 @@
 package creativei.manager;
 
+import org.springframework.stereotype.Service;
 import vo.ResponseObject;
 
 /**

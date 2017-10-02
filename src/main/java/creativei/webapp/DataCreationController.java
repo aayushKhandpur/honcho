@@ -3,12 +3,8 @@ package creativei.webapp;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import creativei.dao.CategoryDao;
-import creativei.dao.MenuItemDao;
-import creativei.dao.RestaurantTableDao;
-import creativei.entity.Category;
-import creativei.entity.MenuItem;
-import creativei.entity.RestaurantTable;
+import creativei.dao.*;
+import creativei.entity.*;
 import creativei.enums.DishType;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -39,6 +35,12 @@ public class DataCreationController {
     RestaurantTableDao restaurantTableDao;
     @Autowired
     MenuItemDao menuItemDao;
+
+    @Autowired
+    RestaurantDao restaurantDao;
+
+    @Autowired
+    UserDao userDao;
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -98,5 +100,25 @@ public class DataCreationController {
         tableList = restaurantTableDao.save(tableList);
         return new ResponseObject(tableList, ResponseObject.ResponseStatus.SUCCESS);
     }
+
+    @RequestMapping(value = "/createrestaurant", produces = "application/json", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Object createUserRestro(HttpServletRequest request){
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName("Bistro");
+        restaurant.setAddressLine1("Raja Park");
+        restaurant.setCity("Jaipur");
+
+        restaurant = restaurantDao.save(restaurant);
+        for(FplusUser user : userDao.findAll() ){
+            user.setRestaurant(restaurant);
+            userDao.save(user);
+        }
+        return "Done";
+
+    }
+
 
 }

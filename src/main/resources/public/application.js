@@ -127,8 +127,6 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
                     console.log(e);
                     return {};
                   });
-
-          return id;
         }
       }
     })
@@ -155,8 +153,6 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
                     console.log(e);
                     return {};
                   });
-
-          return id;
         }
 
       }
@@ -188,23 +184,7 @@ creativei_app.config(function($stateProvider,$urlRouterProvider) {
 
 // Login.js
 creativei_app.controller('LoginCtrl', function($scope, $rootScope,$window,  $http) {
-    console.log("inside login controller..");
-    $scope.user = function () {
-        console.log("GET USER..")
-        // $http({
-        //     method:'POST',
-        //     url:'/j_spring_security_check',
-        //     params:{'j_username':$scope.username,'j_password':$scope.password,'ajax':true}
-        // })
-        //     .success(function(data) {
-        //         alert("success"); // always success
-        //     })
-        //     .error(function(data) {
-        //         alert("error");
-
-        //     });
-    };
-    $scope.user();
+    console.log("inside login controller..");  
 });
 
 creativei_app.controller("MainController",function($scope, $rootScope, $state, $location, $localStorage, $http){
@@ -242,20 +222,19 @@ creativei_app.controller("MainController",function($scope, $rootScope, $state, $
       $rootScope.isAuthenticated = $scope.$storage.isAuthenticated;
       return;
     }
-        console.log("GET USER..")
-        $http({
-            method:'GET',
-            url:'/user',
-        })
-            .success(function(data) {
-                console.log(data);
-                $rootScope.isAuthenticated = $scope.$storage.isAuthenticated = true;
-                $state.go('services');
-            })
-            .error(function(data) {
-                alert("error");
-                console.log(data);
-            });
+        // console.log("GET USER..")
+        // $http({
+        //     method:'GET',
+        //     url:'/user',
+        // })
+        //     .success(function(data) {
+        //         console.log(data);
+        //         $rootScope.isAuthenticated = $scope.$storage.isAuthenticated = true;
+        //         $state.go('services');
+        //     })
+        //     .error(function(data) {
+        //         alert("error");
+        //         console.log(data);
+        //     });
   });
-
 });
