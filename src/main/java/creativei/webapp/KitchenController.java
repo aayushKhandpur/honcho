@@ -1,7 +1,12 @@
 package creativei.webapp;
 
-/**
- * Created by Aayush on 10/8/2017.
- */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class KitchenController {
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+
+
 }
